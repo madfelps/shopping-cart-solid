@@ -1,13 +1,8 @@
 /*
-Liskov substitution principle (Princípio da substituição de Liskov) -
-Se φ(x) é uma propriedade demonstrável dos objetos x de tipo T, então φ(y)
-deve ser verdadeiro para objetos y de tipo S onde S é um subtipo de T.
-
-Ou seja, subtipos precisam ser substituíveis por seus tipos de base.
-
-Ou seja, se meu programa espera um Animal, lago do tipo Dog (herda de Animal)
-deve servir como qualquer outro Animal. 
+Interface segregation principle (Princípio da segregação de Interface) -
+os clientes não devem ser forçados a depender de interfaces que não utilizam
 */
+
 
 import { Order } from "./classes/order";
 import { Messaging } from "./services/messaging";
@@ -15,13 +10,28 @@ import { Persistency } from "./services/persistency";
 import { ShoppingCart } from "./classes/shopping-cart";
 import { Product } from "./classes/product";
 import { FiftyPercentDiscount, NoDiscount } from "./classes/discount";
+import { EnterpriseCustomer, IndividualCustomer } from "./classes/customer";
 
 const noDiscount = new NoDiscount()
 const fiftyPercentDiscount = new FiftyPercentDiscount()
 const shoppingCart = new ShoppingCart(noDiscount)
 const messaging = new Messaging()
 const persistency = new Persistency()
-const order = new Order(shoppingCart, messaging, persistency)
+const individualCustomer = new IndividualCustomer(
+  'Felipe ',
+  'Madureira ',
+  '000.000.000-00',
+);
+const enterpriseCustomer = new EnterpriseCustomer(
+  'TechCompany ',
+  '11111111111111',
+);
+const order = new Order(
+  shoppingCart, 
+  messaging, 
+  persistency,
+  enterpriseCustomer,
+);
 
 shoppingCart.addItem(new Product('Camiseta', 49.9))
 shoppingCart.addItem(new Product('Caderno', 9.9))
