@@ -1,3 +1,9 @@
+/*
+Princípio da responsabilidade única - Uma classe deve ter apenas
+um motivo para mudar 
+*/
+
+
 import { Order } from "./entities/order";
 import { Messaging } from "./services/messaging";
 import { Persistency } from "./services/persistency";
